@@ -1,4 +1,4 @@
-This repository branch contains a skeleton for your personal dotfiles for working with Bash, [Homebrew](http://brew.sh/) and [Vim](http://www.vim.org/), conveniently versioned on-line and scripted such that a fresh install is just one command away. 
+This repository branch contains a skeleton for your personal dotfiles for working with [Bash](http://en.wikipedia.org/wiki/Bash_(Unix_shell), [Homebrew](http://brew.sh/) and [Vim](http://www.vim.org/), conveniently versioned on-line and scripted such that a fresh install is just one command away. 
 
 This set-up modified versions of the scripts from [iheitlager](https://github.com/iheitlager/dotfiles), mainly some renamings,
 placing some functionality in other places, and reducing the need for `sudo`.

@@ -11,13 +11,13 @@ function install_or_upgrade_brew_package(){
     TMPPATH=$PATH
     PATH=${BREW_BIN_PATH}:$PATH
 
-    # only want the latest and greatest
+    # by default we try to upgrade to the last version
     if brew ls $1 > /dev/null 2>&1 
     then 
-        echo "trying to upgrading $1";
+        echo "    trying to upgrading $1";
         brew upgrade $1 2>&1 | grep -v " already installed";
     else 
-        echo "installing"; 
+        echo "    installing $1"; 
         brew install $1;
     fi
 
