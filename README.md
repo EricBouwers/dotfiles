@@ -63,4 +63,4 @@ Do not forget to never checkin secrets in any of these files, use ~/.localrc for
 - More about the dotfile stuff: https://dotfiles.github.io/
 - Get more inspiration here: http://www.dotfiles.org/
 
-[1]: https://github.com/EricBouwers/dotfiles/blob/dotfiles-skeleton
+[1]: https://github.com/EricBouwers/dotfiles/tree/dotfiles-skeleton 
