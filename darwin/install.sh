@@ -144,10 +144,6 @@ then
   defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
   defaults write com.apple.ActivityMonitor SortDirection -int 0
 
-  # Disable the all too sensitive backswipe
-  defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
-  defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
-
   # Use the system-native print preview dialog
   defaults write com.google.Chrome DisablePrintPreview -bool true
   defaults write com.google.Chrome.canary DisablePrintPreview -bool true
