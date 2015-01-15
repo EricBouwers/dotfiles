@@ -1,27 +1,22 @@
-This repository contains my personal dotfiles for working with Bash, [Homebrew](http://brew.sh/) and [Vim](http://www.vim.org/), conveniently versioned on-line and scripted such that a fresh install is just one command away. 
-
-While looking for a way to easily distribute my `.vimrc` to different systems I ran into the 
-[dotfiles repository of iheitlager](https://github.com/iheitlager/dotfiles), 
-which gave me a first insight into the wondrous world of [.dotfiles](https://dotfiles.github.io/).
+This repository branch contains a skeleton for your personal dotfiles for working with Bash, [Homebrew](http://brew.sh/) and [Vim](http://www.vim.org/), conveniently versioned on-line and scripted such that a fresh install is just one command away. 
 
 This set-up modified versions of the scripts from [iheitlager](https://github.com/iheitlager/dotfiles), mainly some renamings,
 placing some functionality in other places, and reducing the need for `sudo`.
 
 ## Install
 
-To install my exact configuration execute the following commands:
+To install this configuration execute the following commands:
 
 ```sh
-git clone https://github.com/EricBouwers/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 ./bootstrap
 ```
 
+This downloads the basic structure into your `.dotfiles` directory. After you made all the changes you want you can create a git repository out of this directory. 
+
 The following commands (located in 'bin') need to be run every now and then to stay up to date:
 * `process_brew_packages` to upgrade [Homebrew](http://brew.sh/) packages
 
-If you want to create repository for your own dotfiles with a similar set-up you probably want to copy the basic structure from 
-the [dotfiles-skeleton branch][1] and add your own specific configuration.
 
 ## Project setup
 
