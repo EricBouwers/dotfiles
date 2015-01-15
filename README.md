@@ -63,4 +63,6 @@ Do not forget to never checkin secrets in any of these files, use ~/.localrc for
 - More about the dotfile stuff: https://dotfiles.github.io/
 - Get more inspiration here: http://www.dotfiles.org/
 
+- Solarized theme made by http://ethanschoonover.com/solarized
+
 [1]: https://github.com/EricBouwers/dotfiles/tree/dotfiles-skeleton 
