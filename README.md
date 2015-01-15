@@ -5,18 +5,22 @@ placing some functionality in other places, and reducing the need for `sudo`.
 
 ## Install
 
-To install this configuration execute the following commands:
+To install the skeleton execute the following commands:
 
 ```sh
+curl -L https://github.com/EricBouwers/dotfiles/archive/dotfiles-skeleton.zip > dotfiles-skeleton.zip
+unzip dotfiles-skeleton.zip -d ~/.dotfiles
 cd ~/.dotfiles
 ./bootstrap
 ```
 
-This downloads the basic structure into your `.dotfiles` directory. After you made all the changes you want you can create a git repository out of this directory. 
+This downloads the basic structure into your `.dotfiles` directory, containing `bash`, `git` and `homebrew`. 
 
 The following commands (located in 'bin') need to be run every now and then to stay up to date:
 * `process_brew_packages` to upgrade [Homebrew](http://brew.sh/) packages
 
+After you made all the changes you want you can create a git repository out of this directory, for more information about this see:
+* https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/
 
 ## Project setup
 
@@ -58,4 +62,3 @@ Do not forget to never checkin secrets in any of these files, use ~/.localrc for
 - More about the dotfile stuff: https://dotfiles.github.io/
 - Get more inspiration here: http://www.dotfiles.org/
 
-[1]: https://github.com/EricBouwers/dotfiles/blob/dotfiles-skeleton
