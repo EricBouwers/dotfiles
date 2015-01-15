@@ -1,4 +1,4 @@
-This repository contains my personal dotfiles for working with Bash, [Homebrew](http://brew.sh/) and [Vim](http://www.vim.org/), conveniently versioned on-line and scripted such that a fresh install is just one command away. 
+This repository contains my personal dotfiles for working with [Bash](http://en.wikipedia.org/wiki/Bash_(Unix_shell), [Homebrew](http://brew.sh/) and [Vim](http://www.vim.org/), conveniently versioned on-line and scripted such that a fresh install is just one command away. 
 
 While looking for a way to easily distribute my `.vimrc` to different systems I ran into the 
 [dotfiles repository of iheitlager](https://github.com/iheitlager/dotfiles), 
