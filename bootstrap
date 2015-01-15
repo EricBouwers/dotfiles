@@ -1,0 +1,174 @@
+#!/usr/bin/env bash
+#
+# bootstrap prepares the environment with dotfiles
+
+# Original script is from https://github.com/holman/dotfiles,
+# this version is adapted from https://github.com/iheitlager/dotfiles
+
+info () {
+  printf "  [ \033[00;34m..\033[0m ] $1"
+}
+
+user () {
+  printf "\r  [ \033[0;33m?\033[0m ] $1 "
+}
+
+success () {
+  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] $1\n"
+}
+
+fail () {
+  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] $1\n"
+  echo ''
+}
+
+# git gitconfig generator, drop the file to generate a new one
+setup_gitconfig () {
+  if ! [ -f git/gitconfig.symlink ]
+  then
+    info 'setup gitconfig'
+
+    user ' - What is your github author name?'
+    read -e git_authorname
+    user ' - What is your github author email?'
+    read -e git_authoremail
+
+    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" git/gitconfig.symlink.example > git/gitconfig.symlink
+
+    success 'gitconfig'
+  fi
+}
+
+# create the actual symlink for a dotfile
+link_file () {
+  local src=$1 dst=$2
+
+  local overwrite= backup= skip=
+  local action=
+
+  if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]
+  then
+
+    if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
+    then
+
+      local currentSrc="$(readlink $dst)"
+
+      if [ "$currentSrc" == "$src" ]
+      then
+
+        skip=true;
+
+      else
+
+        user "File already exists: $dst ($(basename "$src")), what do you want to do?\n\
+        [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
+        read -n 1 action
+
+        case "$action" in
+          o )
+            overwrite=true;;
+          O )
+            overwrite_all=true;;
+          b )
+            backup=true;;
+          B )
+            backup_all=true;;
+          s )
+            skip=true;;
+          S )
+            skip_all=true;;
+          * )
+            ;;
+        esac
+
+      fi
+
+    fi
+
+    overwrite=${overwrite:-$overwrite_all}
+    backup=${backup:-$backup_all}
+    skip=${skip:-$skip_all}
+
+    if [ "$overwrite" == "true" ]
+    then
+      rm -rf "$dst"
+      success "removed $dst"
+    fi
+
+    if [ "$backup" == "true" ]
+    then
+      mv "$dst" "${dst}.backup"
+      success "moved $dst to ${dst}.backup"
+    fi
+
+    if [ "$skip" == "true" ]
+    then
+      success "skipped $src"
+    fi
+  fi
+
+  if [ "$skip" != "true" ]  # "false" or empty
+  then
+    ln -s "$1" "$2"
+    success "linked $1 to $2"
+  fi
+}
+
+install_dotfiles () {
+  info 'installing dotfiles'
+
+  local overwrite_all=false backup_all=false skip_all=false
+
+  for src in $(find "$DOTFILES_PATH" -maxdepth 2 -name '*.symlink')
+  do
+    dst="$HOME/.$(basename "${src%.*}")"
+    link_file "$src" "$dst"
+  done
+}
+
+install_brew_packages () {
+  # If we're on a Mac, we process the brew packages 
+  if [ "$(uname -s)" == "Darwin" ]
+  then
+    info "installing homebrew dependencies"
+    if bin/process_brew_packages; then
+      success "all homebrew dependencies installed"
+    else
+      fail "error installing homebrew dependencies, check the output log above"
+      exit 1
+    fi
+  fi
+}
+
+run_installers () {
+  info "run installers for topic packages"
+  echo -n "" > /tmp/dotfiles-install
+  for src in $(find "$DOTFILES_PATH" -maxdepth 2 -name 'install.sh')
+  do
+    if sh -c "${src}" >> /tmp/dotfiles-install 2>&1
+    then
+      success "executed $src"
+    else
+      fail "error running installer, check /tmp/dotfiles-install"
+      tail -n 5 /tmp/dotfiles-install
+      exit 1
+    fi
+  done
+  success "all installers done"
+}
+
+starttime=$(date +"%s")
+
+export DOTFILES_PATH=$(pwd)
+
+set -e
+echo ''
+
+setup_gitconfig
+install_dotfiles 
+install_brew_packages
+run_installers
+
+endtime=$(($(date +"%s")-$starttime))
+success "All done in $endtime seconds"

@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+##### DOTFILES Configuration #####
+
+export DOTFILES_PATH=$HOME/.dotfiles
+export BREW_BIN_PATH=$(brew --prefix)/bin
+
+
+# set path, make homebrew/bin our preference
+export PATH=`echo ":$PATH:" | sed -e "s#:${BREW_BIN_PATH}:#:#g" -e "s/^://" -e "s/:$//"`
+export PATH=${DOTFILES_PATH}/bin:${BREW_BIN_PATH}:$PATH
+
+source_files () {
+    local alias_file
+    for alias_file in ${DOTFILES_PATH}/**/$1; do
+        source "$alias_file"
+    done
+}
+
+# use .localrc for SUPER SECRET STUFF that you don't
+# want in your public, versioned repo.
+if [ -e ~/.localrc ] ; then
+    source ~/.localrc
+fi
+
+source_files "bash_aliases"
+source_files "bash_env"
+source_files "bash_completion"
+
+unset source_files
+
+#### Personal preferences should be added below

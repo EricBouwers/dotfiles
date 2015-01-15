@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# Process homebrew packages
+
+if [ -z $DOTFILES_PATH ]
+then
+    echo "DOTFILES_PATH variable not set, exiting"
+    exit 1
+fi
+
+function install_or_upgrade_brew_package(){
+    TMPPATH=$PATH
+    PATH=${BREW_BIN_PATH}:$PATH
+
+    # only want the latest and greatest
+    if brew ls $1 > /dev/null 2>&1 
+    then 
+        echo "trying to upgrading $1";
+        brew upgrade $1 2>&1 | grep -v " already installed";
+    else 
+        echo "installing"; 
+        brew install $1;
+    fi
+
+    export PATH=$TMPPATH
+}
+
+# start with brew itself
+source $DOTFILES_PATH/homebrew/brew_install.sh 2>&1 || exit 1
+
+# now process all topical brew packages
+for src in $(find "$DOTFILES_PATH" -maxdepth 2 -name 'brew_packages')
+do
+    echo "  Processing installer: $src"
+    source "${src}" 2>&1 || exit 1
+done
