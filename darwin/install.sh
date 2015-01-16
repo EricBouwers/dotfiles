@@ -161,6 +161,22 @@ then
   defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
   defaults write com.apple.ActivityMonitor SortDirection -int 0
 
-  echo "Done installing Darwin extensions. Note that some changes require a restart (especially the terminal)"
+  # Swap control and command key for all attached keyboards
+  # based on http://apple.stackexchange.com/questions/13598/updating-modifier-key-mappings-through-defaults-command-tool
+  keyboards=$(ioreg -n IOHIDKeyboard -r | grep  -o -e 'VendorID\" = [0-9]\+' -e "ProductID\" = [0-9]\+" | awk -F\  '!(NR%2){printf "%s-0",$3;print "";next}{printf "%s-",$3}')
+
+  for keyboard in $keyboards
+  do
+    defaults -currentHost write NSGlobalDomain "com.apple.keyboard.modifiermapping.${keyboard}" '<array>
+       <dict><key>HIDKeyboardModifierMappingSrc</key><integer>2</integer><key>HIDKeyboardModifierMappingDst</key><integer>4</integer></dict>
+       <dict><key>HIDKeyboardModifierMappingSrc</key><integer>4</integer><key>HIDKeyboardModifierMappingDst</key><integer>2</integer></dict>
+       <dict><key>HIDKeyboardModifierMappingSrc</key><integer>12</integer><key>HIDKeyboardModifierMappingDst</key><integer>10</integer></dict>
+       <dict><key>HIDKeyboardModifierMappingSrc</key><integer>10</integer><key>HIDKeyboardModifierMappingDst</key><integer>12</integer></dict>
+     </array>' 
+   done
+
+   unset keyboards
+
+   echo "Done installing Darwin extensions. Note that some changes require a restart/logout (e.g. those to the terminal and the keyboard)"
 
 fi
