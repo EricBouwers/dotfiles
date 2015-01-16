@@ -24,6 +24,18 @@ function install_or_upgrade_brew_package(){
     export PATH=$TMPPATH
 }
 
+function install_brew_cask(){
+    TMPPATH=$PATH
+    PATH=${BREW_BIN_PATH}:$PATH
+    
+    if ! $(brew cask ls $1 > /dev/null 2>&1)
+    then
+        brew cask install $1
+    fi
+    
+    export PATH=$TMPPATH
+}
+
 # start with brew itself
 source $DOTFILES_PATH/homebrew/brew_install.sh 2>&1 || exit 1
 
