@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if test ! $(which java)
+then
+  echo -e "\n    No Java found, installing cask"  
+  install_brew_cask java
+fi  
