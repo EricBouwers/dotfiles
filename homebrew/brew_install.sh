@@ -20,4 +20,15 @@ if ! brew doctor; then
   exit 1
 fi
 
+# Also install cask
+if test ! $(which brew-cask)
+then
+  echo -e "\n  Installing Homebrew cask in the standard location"
+  brew install caskroom/cask/brew-cask
+else
+  echo -e "\n  Trying to upgrade brew-cask"
+  brew upgrade brew-cask 2>&1 | grep -v " already installed";  
+fi
+
 brew cleanup 
+brew cask cleanup 
