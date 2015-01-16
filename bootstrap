@@ -146,12 +146,11 @@ run_installers () {
   echo -n "" > /tmp/dotfiles-install
   for src in $(find "$DOTFILES_PATH" -maxdepth 2 -name 'install.sh')
   do
-    if sh -c "${src}" >> /tmp/dotfiles-install 2>&1
+    if sh -c "${src}" 
     then
       success "executed $src"
     else
-      fail "error running installer, check /tmp/dotfiles-install"
-      tail -n 5 /tmp/dotfiles-install
+      fail "error running installer, see above"
       exit 1
     fi
   done
