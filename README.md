@@ -1,5 +1,6 @@
-This repository contains my personal dotfiles for working with [Bash](http://en.wikipedia.org/wiki/Bash_(Unix_shell)), 
-[Homebrew](http://brew.sh/), [Homebrew cask](http://caskroom.io/) and [Vim](http://www.vim.org/), conveniently versioned on-line and scripted such that a fresh install is just one command away. 
+This repository contains my personal dotfiles for working with [Bash](http://en.wikipedia.org/wiki/Bash_(Unix_shell)) and [Vim](http://www.vim.org/). 
+By using [Homebrew](http://brew.sh/), [Homebrew cask](http://caskroom.io/) and [npm](https://www.npmjs.com/) everything is 
+conveniently versioned on-line and scripted such that a fresh install is just one command away. 
 
 While looking for a way to easily distribute my `.vimrc` to different systems I ran into the 
 [dotfiles repository of iheitlager](https://github.com/iheitlager/dotfiles), 
@@ -20,6 +21,8 @@ cd ~/.dotfiles
 
 The following commands (located in 'bin') need to be run every now and then to stay up to date:
 * `process_brew_packages` to upgrade [Homebrew](http://brew.sh/) packages
+* `process_npm_packages` to upgrade [npm](https://www.npmjs.com/) packages
+These scripts can be run separately, or by simply typing `dot`.
 
 If you want to create repository for your own dotfiles with a similar set-up you probably want to copy the basic structure from 
 the [dotfiles-skeleton branch][1] and add your own specific configuration.

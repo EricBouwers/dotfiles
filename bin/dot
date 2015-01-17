@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+echo " Processing Homebrew "
+process_brew_packages
+
+echo " Processing npm"
+process_npm_packages

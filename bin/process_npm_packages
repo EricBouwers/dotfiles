@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Process npm packages
+
+if [ -z $DOTFILES_PATH ]
+then
+    echo "DOTFILES_PATH variable not set, exiting"
+    exit 1
+fi
+
+function install_or_upgrade_npm_package(){
+    # by default we try to upgrade to the last version
+    if  npm ls -g --parseable $1 > /dev/null 2>&1 
+    then 
+        echo "    trying to upgrading $1";
+        npm update -g $1@latest 2>&1 
+    else 
+        echo "    installing $1"; 
+        npm install -g $1;
+    fi
+}
+
+echo "  First process npm itself"
+source $DOTFILES_PATH/npm/npm_install.sh 2>&1 || exit 1
+
+echo "  Start processing npm packages."
+for src in $(find "$DOTFILES_PATH" -maxdepth 2 -name 'npm_packages')
+do
+    echo "  Processing npm package: $src"
+    source "${src}" 2>&1 || exit 1
+done
+    
+echo "  Done processing npm packages."
