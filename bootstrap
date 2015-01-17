@@ -128,14 +128,28 @@ install_dotfiles () {
 }
 
 install_brew_packages () {
-  # If we're on a Mac, we process the brew packages 
+  # If we are on a Mac, we process the brew packages 
   if [ "$(uname -s)" == "Darwin" ]
   then
-    info "installing homebrew dependencies"
+    info "installing homebrew packages"
     if bin/process_brew_packages; then
-      success "all homebrew dependencies installed"
+      success "all homebrew packages installed"
     else
-      fail "error installing homebrew dependencies, check the output log above"
+      fail "error installing homebrew packages, check the output above"
+      exit 1
+    fi
+  fi
+}
+
+install_npm_packages() {
+  # If we are on a Mac, we process the npm packages
+  if [ "$(uname -s)" == "Darwin" ]
+  then
+    info "installing npm packages"
+    if bin/process_npm_packages; then
+      success "all npm packages installed"
+    else
+      fail "error installing npm packages, check the output above"
       exit 1
     fi
   fi
@@ -167,6 +181,7 @@ echo ''
 setup_gitconfig
 install_dotfiles 
 install_brew_packages
+install_npm_packages
 run_installers
 
 endtime=$(($(date +"%s")-$starttime))

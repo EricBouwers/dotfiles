@@ -1,5 +1,11 @@
 This repository branch contains a skeleton for your personal dotfiles for working with [Bash](http://en.wikipedia.org/wiki/Bash_(Unix_shell)), 
-[Homebrew](http://brew.sh/), [Homebrew Cask](http://caskroom.io/) and [Vim](http://www.vim.org/), conveniently versioned on-line and scripted such that a fresh install is just one command away. 
+and [Vim](http://www.vim.org/). 
+By using [Homebrew](http://brew.sh/), [Homebrew cask](http://caskroom.io/) and [npm](https://www.npmjs.com/) everything is 
+conveniently versioned on-line and scripted such that a fresh install is just one command away. 
+
+While looking for a way to easily distribute my `.vimrc` to different systems I ran into the 
+[dotfiles repository of iheitlager](https://github.com/iheitlager/dotfiles), 
+which gave me a first insight into the wondrous world of [.dotfiles](https://dotfiles.github.io/).
 
 This set-up modified versions of the scripts from [iheitlager](https://github.com/iheitlager/dotfiles), mainly some renamings,
 placing some functionality in other places, and reducing the need for `sudo`.
@@ -19,6 +25,8 @@ This downloads the basic structure into your `.dotfiles` directory, containing `
 
 The following commands (located in 'bin') need to be run every now and then to stay up to date:
 * `process_brew_packages` to upgrade [Homebrew](http://brew.sh/) packages
+* `process_npm_packages` to upgrade [npm](https://www.npmjs.com/) packages
+These scripts can be run separately, or by simply typing `dot`.
 
 After you made all the changes you want you can create a git repository out of this directory, for more information about this see:
 * https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/
