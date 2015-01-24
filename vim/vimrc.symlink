@@ -5,15 +5,25 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Sets how many lines of history VIM has to remember
+" Sets how many lines of history / undos VIM has to remember
 set history=10000
+set undolevels=1000
 
 " Enable filetype plugins
 filetype plugin on
-filetype indent on
+
+" Set the title
+set title 
 
 " Set to auto read when a file is changed from the outside
 set autoread
+
+" Easily switch to paste mode
+nnoremap OR :set invpaste paste?<CR>
+set pastetoggle=OR
+set showmode
+
+
 
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
@@ -41,7 +51,7 @@ set ruler
 set cmdheight=2
 
 " A buffer becomes hidden when it is abandoned
-set hid
+set hidden
 
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
@@ -56,6 +66,7 @@ set smartcase
 
 " Highlight search results
 set hlsearch
+nmap <silent> <leader>/ :nohlsearch<CR>
 
 " Makes search act like search in modern browsers
 set incsearch
@@ -125,7 +136,7 @@ set tabstop=4
 set lbr
 set tw=150
 
-filetype plugin indent on
+filetype indent on
 set wrap "Wrap lines
 
 
