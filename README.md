@@ -22,6 +22,7 @@ cd ~/.dotfiles
 The following commands (located in 'bin') need to be run every now and then to stay up to date:
 * `process_brew_packages` to upgrade [Homebrew](http://brew.sh/) packages
 * `process_npm_packages` to upgrade [npm](https://www.npmjs.com/) packages
+
 These scripts can be run separately, or by simply typing `dot`.
 
 If you want to create repository for your own dotfiles with a similar set-up you probably want to copy the basic structure from 
