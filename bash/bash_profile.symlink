@@ -30,3 +30,10 @@ source_files "bash_completion"
 unset source_files
 
 #### Personal preferences should be added below
+
+
+export PS1='\u@\h:\w> '
+export HISTCONTROL=erasedups
+export HISTSIZE=1000000
+shopt -s histappend
+PROMPT_COMMAND="history -a"
