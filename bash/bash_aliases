@@ -1,1 +1,14 @@
 #!/usr/bin/env bash
+
+# Some colors
+alias grep='grep --color=auto'
+
+if [ "$(uname -s)" == "Darwin" ]
+then
+  alias ls='ls -G'
+else
+  alias ls='ls --color=always'
+fi  
+
+# Show what we copy
+alias cp='cp -v'
