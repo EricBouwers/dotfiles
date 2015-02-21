@@ -2,3 +2,4 @@
 
 install_or_upgrade_brew_package bash
 install_or_upgrade_brew_package bash-completion 
+install_or_upgrade_brew_package ack
