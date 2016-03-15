@@ -8,7 +8,7 @@ export BREW_BIN_PATH=$(brew --prefix)/bin
 
 # set path, make homebrew/bin our preference
 export PATH=`echo ":$PATH:" | sed -e "s#:${BREW_BIN_PATH}:#:#g" -e "s/^://" -e "s/:$//"`
-export PATH=${DOTFILES_PATH}/bin:${BREW_BIN_PATH}:$PATH
+export PATH=${DOTFILES_PATH}/bin:${BREW_BIN_PATH}:$PATH:$HOME/bin
 
 source_files () {
     local alias_file
@@ -32,8 +32,14 @@ unset source_files
 #### Personal preferences should be added below
 
 export PS1='\u@\h:\w> '
-export HISTCONTROL=erasedups
-export HISTSIZE=1000
-export HISTFILESIZE=1000
+HISTCONTROL="erasedups:ignoreboth"
+export HISTSIZE=10000
+export HISTFILESIZE=10000
 shopt -s histappend
+shopt -s cmdhist
 PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
+
+bind "set completion-ignore-case on"
+bind "set completion-map-case on"
+bind "set show-all-if-ambiguous on"
+
