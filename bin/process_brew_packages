@@ -12,7 +12,7 @@ function install_or_upgrade_brew_package(){
     PATH=${BREW_BIN_PATH}:$PATH
 
     # by default we try to upgrade to the last version
-    if brew ls $1 > /dev/null 2>&1 
+    if brew list $1 > /dev/null 2>&1 
     then 
         echo "    trying to upgrading $1";
         brew upgrade $1 2>&1 | grep -v " already installed";
@@ -28,7 +28,7 @@ function install_brew_cask(){
     TMPPATH=$PATH
     PATH=${BREW_BIN_PATH}:$PATH
     
-    if ! $(brew cask ls $1 > /dev/null 2>&1)
+    if ! $(brew cask list $1 > /dev/null 2>&1)
     then
         brew cask install $1
     fi
