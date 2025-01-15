@@ -4,11 +4,12 @@
 
 export DOTFILES_PATH=$HOME/.dotfiles
 export BREW_BIN_PATH=$(brew --prefix)/bin
+export BREW_SBIN_PATH=$(brew --prefix)/sbin
 
 
 # set path, make homebrew/bin our preference
 export PATH=`echo ":$PATH:" | sed -e "s#:${BREW_BIN_PATH}:#:#g" -e "s/^://" -e "s/:$//"`
-export PATH=${DOTFILES_PATH}/bin:${BREW_BIN_PATH}:$PATH:$HOME/bin
+export PATH=${DOTFILES_PATH}/bin:${BREW_BIN_PATH}:${BREW_SBIN_PATH}:$PATH:$HOME/bin
 
 source_files () {
     local alias_file
@@ -42,4 +43,9 @@ PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 bind "set completion-ignore-case on"
 bind "set completion-map-case on"
 bind "set show-all-if-ambiguous on"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
 

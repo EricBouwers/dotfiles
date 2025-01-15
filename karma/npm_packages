@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-install_or_upgrade_npm_package karma
-install_or_upgrade_npm_package karma-cli
