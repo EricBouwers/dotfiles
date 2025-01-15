@@ -9,7 +9,7 @@ then
   sudo -v
 
   echo -e "\n  Installing Homebrew in the standard location"
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" 
 else
   echo -e "\n  Updating Homebrew"
   brew update
